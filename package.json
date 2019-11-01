@@ -1,0 +1,56 @@
+{
+  "name": "react-tree-file-system",
+  "version": "1.0.0",
+  "description": "To initialize a simple customizable tree view for file system for React",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "server": "webpack-dev-server --mode development --hot",
+    "deploy": "gh-pages -d build",
+    "test": "mocha test/**/*.js --timeout 10000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tharain/react-tree-file-system.git"
+  },
+  "keywords": [
+    "react",
+    "tree",
+    "filesystem"
+  ],
+  "author": "Tharain",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tharain/react-tree-file-system/issues"
+  },
+  "homepage": "https://github.com/tharain/react-tree-file-system#readme",
+  "devDependencies": {
+    "@babel/core": "~7.6.4",
+    "@babel/preset-env": "~7.6.3",
+    "@babel/preset-react": "~7.6.3",
+    "@types/react": "~16.9.11",
+    "awesome-typescript-loader": "~5.2.1",
+    "babel-loader": "~8.0.6",
+    "css-loader": "~3.2.0",
+    "file-loader": "~4.2.0",
+    "gh-pages": "~2.1.1",
+    "html-loader": "~0.5.5",
+    "html-webpack-plugin": "~3.2.0",
+    "husky": "~3.0.9",
+    "nyc": "~14.1.1",
+    "react-markdown": "^4.2.2",
+    "style-loader": "~1.0.0",
+    "typescript": "^3.6.4",
+    "url-loader": "~2.2.0",
+    "webpack": "~4.41.2",
+    "webpack-cli": "~3.3.10",
+    "webpack-dev-server": "~3.9.0"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "~1.2.25",
+    "@fortawesome/free-regular-svg-icons": "~5.11.2",
+    "@fortawesome/react-fontawesome": "~0.1.7",
+    "react": "~16.11.0",
+    "react-dom": "~16.11.0"
+  }
+}
