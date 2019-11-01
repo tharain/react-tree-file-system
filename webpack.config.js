@@ -67,8 +67,8 @@ module.exports = {
     main: THIS_DIR.concat('src/index.js')
   },
   output: {
-    path: THIS_DIR.concat('dist/'),
-    publicPath: '/',
+    path: THIS_DIR.concat('build/'),
+    publicPath: './',
     filename: 'js/[name]_[hash].js',
     chunkFilename: 'js/[name]_[chunkhash].js',
   },
