@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[17],{"MQ5/":function(n,o,c){"use strict";n.exports=r;var a=["\\","`","*","{","}","[","]","(",")","#","+","-",".","!","_",">"],t=a.concat(["~","|"]),m=t.concat(["\n",'"',"$","%","&","'",",","/",":",";","<","=","?","@","^"]);function r(n){var o=n||{};return o.commonmark?m:o.gfm?t:a}r.default=a,r.gfm=t,r.commonmark=m}}]);
