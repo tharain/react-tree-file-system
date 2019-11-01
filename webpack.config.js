@@ -68,7 +68,7 @@ module.exports = {
   },
   output: {
     path: THIS_DIR.concat('build/'),
-    publicPath: './',
+    publicPath: '/',
     filename: 'js/[name]_[hash].js',
     chunkFilename: 'js/[name]_[chunkhash].js',
   },

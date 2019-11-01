@@ -101,6 +101,6 @@ const renderParent = (
   return rend;
 }
 
-const Tree = ({ value, fileOnClick, folderOnClick, fileIcon, folderIcon, style, isDraggable = true, onDrag }: Props) => <div style={{ ...style }}>{renderParent(value, [], fileOnClick, folderOnClick, onDrag, fileIcon, folderIcon, isDraggable)}</div>;
+const Tree = ({ value, fileOnClick, folderOnClick, fileIcon, folderIcon, style, isDraggable, onDrag }: Props) => <div style={{ ...style }}>{renderParent(value, [], fileOnClick, folderOnClick, onDrag, fileIcon, folderIcon, isDraggable)}</div>;
 
 export default Tree;

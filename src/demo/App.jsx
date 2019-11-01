@@ -131,6 +131,7 @@ This is a demo of the file system.
             }}
           >Add File</div>
           <Tree
+            isDraggable
             style={{ padding: 20, borderTop: '2px solid black' }}
             value={this.state.defaultTree}
             onDrag={(fromIndexes, toIndexes) => {
