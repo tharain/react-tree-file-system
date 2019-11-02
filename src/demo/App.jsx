@@ -5,8 +5,6 @@ import { faNewspaper } from '@fortawesome/free-regular-svg-icons';
 
 import Tree from 'src/components/Tree';
 
-import 'src/style/index.css'
-
 const recursiveSetState = (tree, indexes, currIndex, key, value) => {
   const dupTree= tree.slice();
   const getIndex = indexes[currIndex];

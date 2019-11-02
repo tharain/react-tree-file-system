@@ -13,8 +13,13 @@
     "type": "git",
     "url": "git+https://github.com/tharain/react-tree-file-system.git"
   },
+  "files": [
+    "/index.css"
+  ],
   "keywords": [
+    "drag",
     "react",
+    "react-node",
     "tree",
     "filesystem"
   ],
@@ -38,9 +43,8 @@
     "html-webpack-plugin": "~3.2.0",
     "husky": "~3.0.9",
     "nyc": "~14.1.1",
-    "react-markdown": "^4.2.2",
+    "react-markdown": "~4.2.2",
     "style-loader": "~1.0.0",
-    "typescript": "^3.6.4",
     "url-loader": "~2.2.0",
     "webpack": "~4.41.2",
     "webpack-cli": "~3.3.10",
@@ -51,6 +55,7 @@
     "@fortawesome/free-regular-svg-icons": "~5.11.2",
     "@fortawesome/react-fontawesome": "~0.1.7",
     "react": "~16.11.0",
-    "react-dom": "~16.11.0"
+    "react-dom": "~16.11.0",
+    "typescript": "~3.6.4"
   }
 }

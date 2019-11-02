@@ -1,4 +1,4 @@
-import 'src/style/index.css';
-import Tree from 'src/components/Tree';
+const TreeStyle = require('src/style/index.css');
+const Tree = require('src/components/Tree');
 
-export default Tree;
+module.exports = Tree, { TreeStyle };
