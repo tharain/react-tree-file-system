@@ -1,6 +1,6 @@
 {
   "name": "react-tree-file-system",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "To initialize a simple customizable tree view for file system for React",
   "main": "index.js",
   "scripts": {
