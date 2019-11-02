@@ -23,8 +23,163 @@ import Tree from 'react-tree-file-system';
 import 'react-tree-file-system/index.css';
 ```
 
+### Uncontrolled component
 
-### <a name="tree">3 Tree Structure</a>
+- you can toggle folder to open or close by using recursion
+
+```javascript
+const recursiveSetState = (tree, indexes, currIndex, key, value) => {
+  const dupTree= tree.slice();
+  const getIndex = indexes[currIndex];
+  if (currIndex === indexes.length - 1) {
+    dupTree[getIndex][key] = value;
+    return tree;
+  }
+  dupTree[getIndex].children = recursiveSetState(
+    (dupTree[getIndex].children || []).slice(0),
+    indexes,
+    currIndex + 1, key, value
+  );
+  return dupTree;
+}
+
+// ...
+
+class YourClass extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      treeValue: [
+        {
+          title: 'folder name'
+          type: 'folder',
+          children: [
+            {
+              title: 'child 1'
+            },
+            {
+              title: 'child 2'
+            },
+            {
+              title: 'child 3'
+            }
+          ]
+        }
+      ]
+    }
+  }
+
+  render() {
+    return (
+      // ...
+
+      <Tree
+        value={this.state.treeValue}
+        folderOnClick={(_, indexes, state) => {
+          this.setState(prevState => {
+            return {
+              treeValue: recursiveSetState(prevState.treeValue, indexes, 0, 'isOpen', state);
+            }
+          });
+        }}
+      />
+
+      // ...
+    )
+  }
+}
+```
+
+- you can support on drag with recursion
+
+```javascript
+
+const recursivelySetChild = (tree, toIndexes, currIndex, extractData) => {
+  const dupTree= tree.slice();
+  const getIndex = toIndexes[currIndex];
+  if (currIndex === toIndexes.length - 1) {
+    dupTree[getIndex].children.push(extractData);
+    return tree;
+  }
+  dupTree[getIndex].children = recursivelySetChild((dupTree[getIndex].children || []).slice(0), toIndexes, currIndex + 1, extractData);
+  return dupTree;
+}
+
+const getRecursiveItem = (tree, fromIndexes, currIndex) => {
+  const dupTree = tree.slice(0);
+  const getIndex = fromIndexes[currIndex];
+  if(currIndex === fromIndexes.length - 1) {
+    const child = dupTree.filter((_, i) => i === getIndex);
+    return child[0];
+  }
+  return getRecursiveItem((dupTree[getIndex].children || []).slice(0), fromIndexes, currIndex + 1);
+}
+
+const popRecursiveItem = (tree, fromIndexes, currIndex) => {
+  const dupTree = tree.slice(0);
+  const getIndex = fromIndexes[currIndex];
+  if(currIndex === fromIndexes.length - 1) {
+    const filtered = dupTree.filter((_, i) => i !== getIndex);
+    return filtered;
+  }
+  const children = popRecursiveItem((dupTree[getIndex].children || []).slice(0), fromIndexes, currIndex + 1);
+  dupTree[getIndex].children = children;
+  return dupTree;
+}
+
+
+// ...
+
+class YourClass extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      treeValue: [
+        {
+          title: 'folder name'
+          type: 'folder',
+          children: [
+            {
+              title: 'child 1'
+            },
+            {
+              title: 'child 2'
+            },
+            {
+              title: 'child 3'
+            }
+          ]
+        }
+      ]
+    }
+  }
+
+  render() {
+    return (
+      // ...
+
+      <Tree
+        value={this.state.treeValue}
+        onDrag={(fromIndexes, toIndexes) => {
+          this.setState(prevState => {
+            const extractData = getRecursiveItem(prevState.defaultTree, fromIndexes, 0);
+            const extraData = recursivelySetChild(prevState.defaultTree, toIndexes, 0, extractData);
+            const newData = popRecursiveItem(prevState.defaultTree, fromIndexes, 0);
+            return {
+              defaultTree: newData
+            }
+          })
+        }}
+      />
+
+      // ...
+    )
+  }
+}
+```
+
+
+### <a name="tree">4 Tree Structure</a>
 
 ```javascript
 // Node
@@ -65,7 +220,7 @@ interface Node {
 
 | Property | Description | Type | Default |
 | :------: | :------: | :------: | :------: |
-| value | The Tree structure given in [point 2](#tree) | Node[] | undefined |
+| value | The Tree structure given in [point 4](#tree) | Node[] | undefined |
 | fileOnClick | Called when file is clicked | (event, indexes: number[], value: Node) => void | undefined |
 | folderOnClick | Called when folder is clicked | (event, indexes: number[], state: boolean, value: Node) => void | undefined |
 | onDrag | Called when something is dragged on folder | (event, fromIndexes, toIndexes) => void | undefined |
