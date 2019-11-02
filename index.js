@@ -1,3 +1,3 @@
-const Tree = require('src/components/Tree');
+const Tree = require('./src/components/Tree');
 
 module.exports = Tree;

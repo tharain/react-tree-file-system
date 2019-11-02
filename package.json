@@ -15,6 +15,7 @@
   },
   "files": [
     "/index.css"
+    "/src/components/Tree/index.tsx"
   ],
   "keywords": [
     "drag",

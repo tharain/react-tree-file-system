@@ -6,7 +6,25 @@
 
 You can also try out [here](https://tharain.github.io/react-tree-file-system/)
 
-### <a name="tree">2 Tree Structure</a>
+### 2 Get Started
+
+```bash
+# To download, either
+npm install --save react-tree-file-system
+# or
+yarn add react-tree-file-system
+```
+
+In your code
+```javascript
+import Tree from 'react-tree-file-system';
+
+// import stylesheet
+import 'react-tree-file-system/index.css';
+```
+
+
+### <a name="tree">3 Tree Structure</a>
 
 ```javascript
 // Node
@@ -22,22 +40,25 @@ interface Node {
 }
 
 // Example
-{
-  title: 'main', // what is displayed
-  isOpen: false, // optional
-  type: 'folder',
-  folderIcon: <FolderIcon /> // optional
-  children: [
-    {
-      title: 'Child 1',
-    },
-    {
-      title: 'Readme.md',
-      fileIcon: <FileIcon />, // optional
-      text: 'demo text'
-    },
-  ]
-}
+[
+  {
+    title: 'main', // what is displayed
+    isOpen: false, // optional
+    type: 'folder',
+    folderIcon: <FolderIcon /> // optional
+    children: [
+      {
+        title: 'Child 1',
+      },
+      {
+        title: 'Readme.md',
+        fileIcon: <FileIcon />, // optional
+        text: 'demo text'
+      },
+    ]
+  },
+  // ... repeat Node
+]
 ```
 
 ### 3 API
