@@ -1,21 +1,22 @@
 {
   "name": "react-tree-file-system",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "To initialize a simple customizable tree view for file system for React",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
     "server": "webpack-dev-server --mode development --hot",
     "deploy": "gh-pages -d build",
-    "test": "mocha test/**/*.js --timeout 10000"
+    "test": "mocha test/**/*.js --timeout 10000",
+    "publish": "tsc"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tharain/react-tree-file-system.git"
   },
   "files": [
-    "/index.css"
-    "/src/components/Tree/index.tsx"
+    "/index.css",
+    "/lib/**/*"
   ],
   "keywords": [
     "drag",
