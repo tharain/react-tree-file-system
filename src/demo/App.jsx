@@ -139,12 +139,13 @@ This is a demo of the file system.
             isDraggable
             style={{ padding: 20, borderTop: '2px solid black' }}
             value={this.state.defaultTree}
-            onDrag={(fromIndexes, toIndexes) => {
+            onDrop={(fromIndexes, toIndexes) => {
               this.setState(prevState => {
                 const extractData = getRecursiveItem(prevState.defaultTree, fromIndexes, 0);
                 const extraData = recursivelySetChild(prevState.defaultTree, toIndexes, 0, extractData);
                 const newData = popRecursiveItem(prevState.defaultTree, fromIndexes, 0);
                 return {
+                  selected: toIndexes.join(','),
                   defaultTree: newData
                 }
               })

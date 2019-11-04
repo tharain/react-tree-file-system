@@ -7,6 +7,10 @@ A basic tree file system that allows customisation
 
 ### 1 Demo
 
+Version 1.1.0
+![](Demo2.gif)
+
+Version 1.0.6
 ![](Demo.gif)
 
 You can also try out [here](https://tharain.github.io/react-tree-file-system/)
@@ -230,7 +234,8 @@ interface Node {
 | value | The Tree structure given in [point 4](#tree) | Node[] | undefined |
 | fileOnClick | Called when file is clicked | (event, indexes: number[], value: Node) => void | undefined |
 | folderOnClick | Called when folder is clicked | (event, indexes: number[], state: boolean, value: Node) => void | undefined |
-| onDrag | Called when something is dragged on folder | (event, fromIndexes, toIndexes) => void | undefined |
+| onDrop | Called when something is dragged on folder [Replace onDrag] | (event, fromIndexes, toIndexes) => void | undefined |
+| onDrag | Called when something is dragged on folder [Depreciated] | (event, fromIndexes, toIndexes) => void | undefined |
 | folderIcon | Replace the default folder icon | JSX.Element | undefined |
 | fileIcon | Replace the default file icon | JSX.Element | undefined |
 | style | customize the general style | React.CSSProperties | undefined |
