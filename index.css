@@ -17,3 +17,7 @@
   margin-left: 7px;
   padding-left: 15px;
 }
+
+.tree_file_system_node_selected {
+  background-color: #FFF;
+}

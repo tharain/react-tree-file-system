@@ -52,3 +52,11 @@ div:focus {
   padding: 10px;
   text-align: center;
 }
+
+.democlass {
+  color: green;
+}
+
+.democlass:hover {
+  font-size: 1.2em;
+}

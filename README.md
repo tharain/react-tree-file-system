@@ -1,5 +1,10 @@
 # react-tree-file-system
 
+A basic tree file system that allows customisation
+- custom CSS and classNames
+- drag and drop available
+- demo available
+
 ### 1 Demo
 
 ![](Demo.gif)
@@ -186,11 +191,13 @@ class YourClass extends React.Component {
 interface Node {
   title: string,
   isOpen?: boolean,
-  isLocked?: boolean,
-  isHidden?: boolean,
+  // isLocked?: boolean, // No support yet
+  // isHidden?: boolean, // No support yet
   children?: Node[],
   folderIcon?: React.Element,
   fileIcon?: React.Element,
+  style?: React.CSSProperties,
+  className?: string,
   // able to add anything here
 }
 
@@ -216,7 +223,7 @@ interface Node {
 ]
 ```
 
-### 3 API
+### 5 API
 
 | Property | Description | Type | Default |
 | :------: | :------: | :------: | :------: |
@@ -228,3 +235,5 @@ interface Node {
 | fileIcon | Replace the default file icon | JSX.Element | undefined |
 | style | customize the general style | React.CSSProperties | undefined |
 | isDraggable | customize the general style | React.CSSProperties | false |
+| selected | Enable highlighting of cell clicked. Basically just store the indexes as indexes.join(',') | string | undefined |
+| selectedClassName | customize the highlighted style with your own className | string | undefined |

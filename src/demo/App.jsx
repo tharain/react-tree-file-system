@@ -53,6 +53,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      selected: '',
       defaultTree: [{
         title: 'main',
         isOpen: false,
@@ -80,7 +81,12 @@ This is a demo of the file system.
                     `
                   },
                   {
-                    title: 'Child 2.2',
+                    title: 'Test Style',
+                    style: { color: 'red', background: 'yellow' }
+                  },
+                  {
+                    title: 'Test Class',
+                    className: 'democlass'
                   }
                 ]
               }
@@ -129,6 +135,7 @@ This is a demo of the file system.
             }}
           >Add File</div>
           <Tree
+            selected={this.state.selected}
             isDraggable
             style={{ padding: 20, borderTop: '2px solid black' }}
             value={this.state.defaultTree}
@@ -144,6 +151,7 @@ This is a demo of the file system.
             }}
             fileOnClick={(_, indexes, value) => {
               this.setState({
+                selected: indexes.join(','),
                 text: `---
 
 ${value.text || `
@@ -160,6 +168,7 @@ ${JSON.stringify(value)}
               this.setState(prevState => {
                 const newData = recursiveSetState(prevState.defaultTree.slice(0), indexes, 0, 'isOpen', state)
                 return {
+                  selected: indexes.join(','),
                   defaultTree: newData,
                   action: `Clicked on folder ${value.title}`
                 }

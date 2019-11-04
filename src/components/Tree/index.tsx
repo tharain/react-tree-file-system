@@ -11,6 +11,8 @@ interface Props {
   fileIcon?: JSX.Element,
   style?: React.CSSProperties,
   isDraggable?: boolean,
+  selected?: string,
+  selectedClassName?: string,
 }
 
 interface Node {
@@ -19,6 +21,8 @@ interface Node {
   isLocked?: boolean,
   isHidden?: boolean,
   children?: Node[],
+  style?: React.CSSProperties,
+  className?: string,
   [extra: string]: any,
 }
 
@@ -31,10 +35,12 @@ const renderChildren = (
   fileIcon?: JSX.Element,
   folderIcon?: JSX.Element,
   isDraggable?: boolean,
+  selected?: string,
+  selectedClassName?: string,
 ) => {
   return (
     <div key={`${indexes[indexes.length - 1]}_child`} className="tree_file_system_children">
-      {renderParent(children, indexes, fileOnClick, folderOnClick, onDrag, fileIcon, folderIcon, isDraggable)}
+      {renderParent(children, indexes, fileOnClick, folderOnClick, onDrag, fileIcon, folderIcon, isDraggable, selected, selectedClassName)}
     </div>
   )
 }
@@ -48,6 +54,8 @@ const renderParent = (
   fileIcon?: JSX.Element,
   folderIcon?: JSX.Element,
   isDraggable?: boolean,
+  selected?: string,
+  selectedClassName?: string,
 ) => {
   let rend: JSX.Element[] = [];
   parent.sort((a,b) => a.title.localeCompare(b.title)).forEach((p: Node, i: number) => {
@@ -55,6 +63,7 @@ const renderParent = (
       <div
         key={`${i}_node`}
         draggable={isDraggable}
+        style={p.style}
         onDragStart={(e) => {
           const newIndexes = [...indexes, i]
           e.dataTransfer.setData('react_tree_file_system_from', newIndexes.join(','));
@@ -73,7 +82,7 @@ const renderParent = (
           e.preventDefault();
         }}
         role="button"
-        className="tree_file_system_node"
+        className={`tree_file_system_node ${[...indexes, i].join(',') === selected && (selectedClassName || 'tree_file_system_node_selected')} ${p.className}`}
         onClick={(event) => {
           const newIndexes = [...indexes, i];
           if(!p.children || ((p.children && p.children.length === 0) && p.type !== 'folder')) {
@@ -95,12 +104,12 @@ const renderParent = (
 
     if(p.isOpen) {
       const newIndexes = [...indexes, i];
-      rend.push(renderChildren(p.children || [], newIndexes, fileOnClick, folderOnClick, onDrag, fileIcon, folderIcon, isDraggable));
+      rend.push(renderChildren(p.children || [], newIndexes, fileOnClick, folderOnClick, onDrag, fileIcon, folderIcon, isDraggable, selected, selectedClassName));
     }
   })
   return rend;
 }
 
-const Tree = ({ value, fileOnClick, folderOnClick, fileIcon, folderIcon, style, isDraggable, onDrag }: Props) => <div style={{ ...style }}>{renderParent(value, [], fileOnClick, folderOnClick, onDrag, fileIcon, folderIcon, isDraggable)}</div>;
+const Tree = ({ value, fileOnClick, folderOnClick, fileIcon, folderIcon, style, isDraggable, onDrag, selected, selectedClassName }: Props) => <div style={{ ...style }}>{renderParent(value, [], fileOnClick, folderOnClick, onDrag, fileIcon, folderIcon, isDraggable, selected, selectedClassName)}</div>;
 
 export default Tree;
