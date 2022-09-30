@@ -31,9 +31,29 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/,
-        include: THIS_DIR,
-        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+        test: /\.(css|less)$/,
+        use: [
+          isProd
+            ? {
+              loader: MiniCssExtractPlugin.loader,
+            }
+            : 'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                auto: /\.m\.\w+$/i,
+                localIdentName: '[local]--[hash:base64:5]',
+              },
+            },
+          },
+          {
+            loader: "less-loader",
+            options: {
+              implementation: require("less"),
+            },
+          },
+        ],
       },
       {
         test: /\.jpg$/,
