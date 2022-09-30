@@ -1,8 +1,9 @@
 const path = require('path');
-const webpack = require('webpack');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const THIS_DIR = path.join(__dirname, './');
+const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
   module: {
@@ -31,9 +32,25 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/,
-        include: THIS_DIR,
-        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+        test: /\.(css|less)$/,
+        use: [
+          isProd
+            ? {
+              loader: MiniCssExtractPlugin.loader,
+            }
+            : 'style-loader',
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                javascriptEnabled: true,
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.jpg$/,
@@ -46,14 +63,6 @@ module.exports = {
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file-loader',
-      },
-      {
-        test: /\.png$/,
-        loader: 'url-loader?limit=100000',
-      },
-      {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff',
       },
     ],
   },
@@ -72,18 +81,13 @@ module.exports = {
     filename: 'js/[name]_[hash].js',
     chunkFilename: 'js/[name]_[chunkhash].js',
   },
-  devServer: {
-    hot: true,
-    contentBase: THIS_DIR.concat('src/'),
-  },
   plugins: [
-    new HTMLWebpackPlugin({
+    new HtmlWebpackPlugin({
       template: THIS_DIR.concat('src/demo/index.html'),
       favicon: THIS_DIR.concat('src/demo/logo.png'),
     }),
-    new webpack.HashedModuleIdsPlugin(),
+    new MiniCssExtractPlugin(),
   ],
-  watch: true,
   optimization: {
     runtimeChunk: 'single',
     splitChunks: {
